@@ -99,7 +99,9 @@ class RPNHead(nn.Module):
     def forward(self, x):
         logits = []
         bbox_reg = []
+        print(len(x))
         for feature in x:
+            print(feature.shape)
             t = F.relu(self.conv(feature))
             logits.append(self.cls_logits(t))
             bbox_reg.append(self.bbox_pred(t))

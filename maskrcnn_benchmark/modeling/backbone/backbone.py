@@ -7,6 +7,7 @@ from maskrcnn_benchmark.modeling import registry
 from maskrcnn_benchmark.modeling.make_layers import conv_with_kaiming_uniform
 from . import fpn as fpn_module
 from . import resnet
+from . import vgg
 
 
 @registry.BACKBONES.register("R-50-C4")
@@ -69,6 +70,15 @@ def build_resnet_fpn_p3p7_backbone(cfg):
     model = nn.Sequential(OrderedDict([("body", body), ("fpn", fpn)]))
     model.out_channels = out_channels
     return model
+
+
+@registry.BACKBONES.register('VGG-16')
+def build_vgg_backbone(cfg):
+    body=vgg.vgg16(pretrained=False,progress=False)
+    model = body
+    model.out_channels = cfg.MODEL.RESNETS.BACKBONE_OUT_CHANNELS
+    return model
+
 
 
 def build_backbone(cfg):
