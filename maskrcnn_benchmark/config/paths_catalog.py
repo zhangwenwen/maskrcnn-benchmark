@@ -141,7 +141,7 @@ class ModelCatalog(object):
         "MSRA/R-101": "ImageNetPretrained/MSRA/R-101.pkl",
         "MSRA/R-101-GN": "ImageNetPretrained/47592356/R-101-GN.pkl",
         "FAIR/20171220/X-101-32x8d": "ImageNetPretrained/20171220/X-101-32x8d.pkl",
-        "VGG/VGG-16":"https://download.pytorch.org/models/vgg16-397923af.pth"
+        "VGG/VGG-16":"http://121.42.33.170/downloads/PreImageNetPytorch_Models/vgg16-397923af.pth"
     }
 
     C2_DETECTRON_SUFFIX = "output/train/{}coco_2014_train%3A{}coco_2014_valminusminival/generalized_rcnn/model_final.pkl"
@@ -172,7 +172,7 @@ class ModelCatalog(object):
         prefix = ModelCatalog.S3_C2_DETECTRON_URL
         name = name[len("ImageNetPretrained/"):]
         name = ModelCatalog.C2_IMAGENET_MODELS[name]
-        url = "/".join([prefix, name])
+        url =name if name.startswith('http')   else  "/".join([prefix, name])
         return url
 
     @staticmethod
