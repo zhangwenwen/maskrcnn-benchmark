@@ -74,11 +74,9 @@ def build_resnet_fpn_p3p7_backbone(cfg):
 
 @registry.BACKBONES.register('VGG-16')
 def build_vgg_backbone(cfg):
-    body=vgg.vgg16(pretrained=False,progress=False)
-    model = body
+    model = vgg.vgg16(pretrained=False, progress=False)
     model.out_channels = cfg.MODEL.RESNETS.BACKBONE_OUT_CHANNELS
     return model
-
 
 
 def build_backbone(cfg):
